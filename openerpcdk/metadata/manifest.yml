@@ -1,23 +1,23 @@
-Name: mule
-Cartridge-Short-Name: MULE
-Display-Name: Mule Cartridge
-Description: The Mule ESB application
-Version: '0.2'
+Name: openERP
+Cartridge-Short-Name: openERP
+Display-Name: openERP Cartridge
+Description: The openERP application
+Version: '0.1'
 License: ASL 2.0
 License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
 Cartridge-Version: 0.0.2-ae34981a
 Compatible-Versions:
 - 0.0.1
-Cartridge-Vendor: pcsol
-Vendor: pcsol
+Cartridge-Vendor: jhaopenshift
+Vendor: jhaopenshift
 Categories:
 - web_framework
 - experimental
 Website: 
 Help-Topics:
-  Getting Started: https://oo.pcsol.be/getting-started-with-mule-applications-on-openshift
+  Getting Started: https://jha.pcsol.be/getting-started-with-openERP-applications-on-openshift
 Cart-Data:
-- Key: OPENSHIFT_MULE_LOG_DIR
+- Key: OPENSHIFT_openERP_LOG_DIR
   Type: environment
   Description: Directory to store application log files.
 - Key: OPENSHIFT_TMP_DIR
@@ -27,10 +27,10 @@ Cart-Data:
   Type: environment
   Description: Application root directory where application files reside. This directory
     is reset every time you do a git-push
-- Key: OPENSHIFT_MULE_PORT
+- Key: OPENSHIFT_openERP_PORT
   Type: environment
   Description: Internal port to which the web-framework binds to.
-- Key: OPENSHIFT_MULE_IP
+- Key: OPENSHIFT_openERP_IP
   Type: environment
   Description: Internal IP to which the web-framework binds to.
 - Key: OPENSHIFT_APP_DNS
@@ -51,8 +51,8 @@ Cart-Data:
   Type: environment
   Description: Unique ID which identified the gear. This value changes between gears.
 Provides:
-- mule-0.1
-- mule
+- openERP-0.1
+- python
 Publishes: 
 Subscribes:
   set-env:
@@ -83,6 +83,3 @@ Endpoints:
     Backend: ''
     Options:
       health: true
-Additional-Control-Actions:
-- threaddump
-Source-Url: http://cdkmule-pcsool.rhcloud.com/archive/ae34981a02d4012819ff658c6270683ab056749d/mule.zip
