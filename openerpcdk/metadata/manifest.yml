@@ -1,5 +1,5 @@
 Name: python
-Cartridge-Short-Name: PYTHON
+Cartridge-Short-Name: python
 Display-Name: python-2.7.3 Cartridge
 Display-Name: Python 2.7.3 Community Cartridge
 Description: "Community supported Python 2.7 cartridge. See the community site for examples of bringing your cartridge to OpenShift. Python is a general-purpose, high-level programming language whose design philosophy emphasizes code readability. Popular development frameworks include: Django, Bottle, Pylons, Zope and TurboGears."
