@@ -1,32 +1,88 @@
-Name: cdk-jha
-Cartridge-Short-Name: CDK-JHA
-Display-Name: OpenShift Cartridge Development Kit
-Version: '1.0'
-Website: https://github.com/smarterclayton/openshift-cdk-cart
-Cartridge-Version: 0.1.0-2ccd7a3a
-Cartridge-Vendor: smarterclayton
+Name: mule
+Cartridge-Short-Name: MULE
+Display-Name: Mule Cartridge
+Description: The Mule ESB application
+Version: '0.2'
+License: ASL 2.0
+License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
+Cartridge-Version: 0.0.2-ae34981a
+Compatible-Versions:
+- 0.0.1
+Cartridge-Vendor: pcsol
+Vendor: pcsol
 Categories:
-- service
 - web_framework
-- ci_builder
+- experimental
+Website: 
+Help-Topics:
+  Getting Started: https://oo.pcsol.be/getting-started-with-mule-applications-on-openshift
+Cart-Data:
+- Key: OPENSHIFT_MULE_LOG_DIR
+  Type: environment
+  Description: Directory to store application log files.
+- Key: OPENSHIFT_TMP_DIR
+  Type: environment
+  Description: Directory to store application temporary files.
+- Key: OPENSHIFT_REPO_DIR
+  Type: environment
+  Description: Application root directory where application files reside. This directory
+    is reset every time you do a git-push
+- Key: OPENSHIFT_MULE_PORT
+  Type: environment
+  Description: Internal port to which the web-framework binds to.
+- Key: OPENSHIFT_MULE_IP
+  Type: environment
+  Description: Internal IP to which the web-framework binds to.
+- Key: OPENSHIFT_APP_DNS
+  Type: environment
+  Description: Fully qualified domain name for the application.
+- Key: OPENSHIFT_APP_NAME
+  Type: environment
+  Description: Application name
+- Key: OPENSHIFT_DATA_DIR
+  Type: environment
+  Description: Directory to store application data files. Preserved across git-pushes.
+    Not shared across gears.
+- Key: OPENSHIFT_APP_UUID
+  Type: environment
+  Description: Unique ID which identified the application. Does not change between
+    gears.
+- Key: OPENSHIFT_GEAR_UUID
+  Type: environment
+  Description: Unique ID which identified the gear. This value changes between gears.
 Provides:
-- cdk-1.0
-- cdk
+- mule-0.1
+- mule
+Publishes: 
+Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
 Scaling:
   Min: 1
   Max: 1
 Group-Overrides:
 - components:
-  - cdk-1.0
-Install-Build-Required: false
+  - web-proxy
 Endpoints:
 - Private-IP-Name: IP
   Private-Port-Name: PORT
   Private-Port: 8080
   Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  - ws
+  Options:
+    primary: true
   Mappings:
   - Frontend: ''
     Backend: ''
     Options:
-      websocket: false
-Source-Url: http://cdk-claytondev.rhcloud.com/archive/2ccd7a3a7762e4ebb873c0d64a247b180e0600b8/cdk.zip
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
+Additional-Control-Actions:
+- threaddump
+Source-Url: http://cdkmule-pcsool.rhcloud.com/archive/ae34981a02d4012819ff658c6270683ab056749d/mule.zip
