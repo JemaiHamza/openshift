@@ -1,61 +1,65 @@
-About OpenERP
--------------
+Feel free to change or remove this file, it is informational only.
 
-OpenERP is an OpenSource/Free software Enterprise Resource Planning and
-Customer Relationship Management software. More info at:
+Repo layout
+===========
+wsgi/ - Externally exposed wsgi code goes
+wsgi/static/ - Public static content gets served here
+libs/ - Additional libraries
+data/ - For not-externally exposed wsgi code
+setup.py - Standard setup.py, specify deps here
+.openshift/action_hooks/pre_build - Script that gets run every git push before the build
+.openshift/action_hooks/build - Script that gets run every git push as part of the build process (on the CI system if available)
+.openshift/action_hooks/deploy - Script that gets run every git push after build but before the app is restarted
+.openshift/action_hooks/post_deploy - Script that gets run every git push after the app is restarted
 
-    http://www.openerp.com
+Notes about layout
+==================
+Every time you push, everything in your remote repo dir gets recreated, please
+store long term items (like an sqlite database) in the OpenShift data
+directory, which will persist between pushes of your repo.
+The OpenShift data directory is accessible relative to the remote repo
+directory (../data) or via an environment variable OPENSHIFT_DATA_DIR.
 
-Installation on Debian/Ubuntu
------------------------------
 
-Add the the apt repository
+Environment Variables
+=====================
 
-    deb http://nightly.openerp.com/6.1/deb/ ./
+OpenShift provides several environment variables to reference for ease
+of use.
 
-in your source.list and type:
 
-    $ sudo apt-get update
-    $ sudo apt-get install openerp
+When embedding a database using 'rhc cartridge add', you can reference
+environment variables for username, host and password. Example for mysql:
 
-Or download the deb file and type:
+    os.environ['OPENSHIFT_MYSQL_DB_HOST']      - DB host
+    os.environ['OPENSHIFT_MYSQL_DB_PORT']      - DB Port
+    os.environ['OPENSHIFT_MYSQL_DB_USERNAME']  - DB Username
+    os.environ['OPENSHIFT_MYSQL_DB_PASSWORD']  - DB Password
 
-    $ sudo dpkg -i <openerp-deb-filename>
-    $ sudo apt-get install install -f
+When embedding a NoSQL database using 'rhc cartridge add', you can
+reference environment variables for username, host and password.
+Example for MongoDB:
+    os.environ['OPENSHIFT_MONGODB_DB_HOST']      - NoSQL DB Host
+    os.environ['OPENSHIFT_MONGODB_DB_PORT']      - NoSQL DB Port
+    os.environ['OPENSHIFT_MONGODB_DB_USERNAME']  - NoSQL DB Username
+    os.environ['OPENSHIFT_MONGODB_DB_PASSWORD']  - NoSQL DB Password
 
-Installation on RedHat, Fedora, CentOS
---------------------------------------
+To get a full list of environment variables, simply add a line in your
+.openshift/action_hooks/build script that says "export" and push.
 
-Install the required dependencies:
 
-    $ yum install python
-    $ easy_install pip
-    $ pip install .....
+Notes about layout
+==================
+Please leave wsgi, libs and data directories but feel free to create additional
+directories if needed.
 
-Install the openerp rpm
+Note: Every time you push, everything in your remote repo dir gets recreated
+please store long term items (like an sqlite database) in ../data which will
+persist between pushes of your repo.
 
-    $ rpm -i openerp-VERSION.rpm
 
-Installation on Windows
------------------------
+Notes about setup.py
+====================
 
-    Check the notes in setup.py
-
-Installation on MacOSX
------------------------
-
-Setuping you first database
----------------------------
-
-Point your browser to http://localhost:8069/ and click "Manage Databases", the
-default master password is "admin".
-
-Detailed System Requirements
-----------------------------
-
-The dependencies are listed in setup.py
-
-For Luxembourg localization, you also need:
-
- pdftk (http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
-
+Adding deps to the install_requires will have the openshift server actually
+install those deps at git push time.
