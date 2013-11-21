@@ -1,5 +1,5 @@
-Name: openERP
-Cartridge-Short-Name: openERP
+Name: openerp
+Cartridge-Short-Name: openerp
 Display-Name: openERP Cartridge
 Description: The openERP application
 Version: '0.1'
@@ -17,7 +17,7 @@ Website:
 Help-Topics:
   Getting Started: https://jha.pcsol.be/getting-started-with-openERP-applications-on-openshift
 Cart-Data:
-- Key: OPENSHIFT_openERP_LOG_DIR
+- Key: OPENSHIFT_openerp_LOG_DIR
   Type: environment
   Description: Directory to store application log files.
 - Key: OPENSHIFT_TMP_DIR
@@ -27,10 +27,10 @@ Cart-Data:
   Type: environment
   Description: Application root directory where application files reside. This directory
     is reset every time you do a git-push
-- Key: OPENSHIFT_openERP_PORT
+- Key: OPENSHIFT_openerp_PORT
   Type: environment
   Description: Internal port to which the web-framework binds to.
-- Key: OPENSHIFT_openERP_IP
+- Key: OPENSHIFT_openerp_IP
   Type: environment
   Description: Internal IP to which the web-framework binds to.
 - Key: OPENSHIFT_APP_DNS
@@ -51,7 +51,7 @@ Cart-Data:
   Type: environment
   Description: Unique ID which identified the gear. This value changes between gears.
 Provides:
-- openERP-0.1
+- openerp-0.1
 - python
 Publishes: 
 Subscribes:
