@@ -1,5 +1,5 @@
 Name: cdk-jha
-Cartridge-Short-Name: CDK
+Cartridge-Short-Name: CDK-JHA
 Display-Name: OpenShift Cartridge Development Kit
 Version: '1.0'
 Website: https://github.com/smarterclayton/openshift-cdk-cart
