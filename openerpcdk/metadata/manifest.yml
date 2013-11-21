@@ -1,4 +1,4 @@
-Name: python-2.7
+Name: python
 Cartridge-Short-Name: PYTHON
 Display-Name: python-2.7 Cartridge
 Display-Name: Python 2.7 Community Cartridge
@@ -6,7 +6,11 @@ Description: "Community supported Python 2.7 cartridge. See the community site f
 Version: 1.0.0
 License: "ASL 2.0"
 License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
-Vendor:
+Cartridge-Version: 0.0.2-ae34981a
+Compatible-Versions:
+- 0.0.1
+Cartridge-Vendor: jha
+Vendor: jha
 Categories:
   - service
   - python
@@ -99,5 +103,22 @@ Group-Overrides:
     - python-2.7
     - web_proxy
 Endpoints:
-  - PROXY_PORT: 8080
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  - ws
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
 
