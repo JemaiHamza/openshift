@@ -1,103 +1,109 @@
+---
 Name: python
-Cartridge-Short-Name: openerpcdk
-Display-Name: Python 2.6.6 Community Cartridge
-Description: "jha"
-Version: 1.0.0
-License: "ASL 2.0"
-License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
-Cartridge-Vendor: jha
-Vendor: jha
+Cartridge-Short-Name: PYTHON
+Display-Name: Python 2.6
+Description: ! 'Python is a general-purpose, high-level programming language whose
+  design philosophy emphasizes code readability. Popular development frameworks include:
+  Django, Bottle, Pylons, Zope and TurboGears.'
+Version: '2.6'
+Versions:
+- '2.6'
+- '2.7'
+- '3.3'
+License: The Python License, version 2.6
+License-Url: http://docs.python.org/3/license.html
+Vendor: python.org
+Cartridge-Version: 0.0.7
+Compatible-Versions: []
+Cartridge-Vendor: redhat
 Categories:
-  - service
-  - python
-  - web_framework
-  - community
-Website: "http://www.python.org"
+- service
+- python
+- web_framework
+Website: http://www.python.org
 Help-Topics:
-  "Developer Center": https://openshift.redhat.com/community/developers
-  "Getting Started": https://www.openshift.com/community/videos/getting-started-with-diy-applications-on-openshift
+  Developer Center: https://www.openshift.com/developers
 Cart-Data:
-  - Key: OPENSHIFT_LOG_DIR
-    Type: environment
-    Description: "Directory to store application log files."
-  - Key: OPENSHIFT_TMP_DIR
-    Type: environment
-    Description: "Directory to store application temporary files."
-  - Key: OPENSHIFT_REPO_DIR
-    Type: environment
-    Description: "Application root directory where application files reside. This directory is reset everytime you do a git-push"
-  - Key: OPENSHIFT_INTERNAL_PORT
-    Type: environment
-    Description: "Internal port to which the web-framework binds to."
-  - Key: OPENSHIFT_INTERNAL_IP
-    Type: environment
-    Description: "Internal IP to which the web-framework binds to."
-  - Key: OPENSHIFT_APP_DNS
-    Type: environment
-    Description: "Fully qualified domain name for the application."
-  - Key: OPENSHIFT_APP_NAME
-    Type: environment
-    Description: "Application name"
-  - Key: OPENSHIFT_DATA_DIR
-    Type: environment
-    Description: "Directory to store application data files. Preserved across git-pushes. Not shared across gears."
-  - Key: OPENSHIFT_APP_UUID
-    Type: environment
-    Description: "Unique ID which identified the application. Does not change between gears."
-  - Key: OPENSHIFT_GEAR_UUID
-    Type: environment
-    Description: "Unique ID which identified the gear. This value changes between gears."
-Suggests:
+- Key: OPENSHIFT_TMP_DIR
+  Type: environment
+  Description: Directory to store application temporary files.
+- Key: OPENSHIFT_REPO_DIR
+  Type: environment
+  Description: Application root directory where application files reside. This directory
+    is reset every time you do a git-push
+- Key: OPENSHIFT_PYTHON_PORT
+  Type: environment
+  Description: Internal port to which the web-framework binds to.
+- Key: OPENSHIFT_PYTHON_IP
+  Type: environment
+  Description: Internal IP to which the web-framework binds to.
+- Key: OPENSHIFT_APP_DNS
+  Type: environment
+  Description: Fully qualified domain name for the application.
+- Key: OPENSHIFT_APP_NAME
+  Type: environment
+  Description: Application name
+- Key: OPENSHIFT_DATA_DIR
+  Type: environment
+  Description: Directory to store application data files. Preserved across git-pushes.
+    Not shared across gears.
+- Key: OPENSHIFT_APP_UUID
+  Type: environment
+  Description: Unique ID which identified the application. Does not change between
+    gears.
+- Key: OPENSHIFT_GEAR_UUID
+  Type: environment
+  Description: Unique ID which identified the gear. This value changes between gears.
 Provides:
-  - "python-2.6.6"
-  - "wsgi"
-Requires:
-Conflicts:
-Native-Requires:
-  - python
-  - MySQL-python
-  - pymongo
-  - pymongo-gridfs
-  - python-psycopg2
-  - python-virtualenv
-  - libjpeg
-  - libjpeg-devel
-  - libcurl
-  - libcurl-devel
-Architecture: noarch
-Reservations:
-  - MEM >= 100MB
-Start-Order: wsgi
-Publishes:
-  get-doc-root:
-    Type: "FILESYSTEM:doc-root"
-  publish-http-url:
-    Type: "NET_TCP:httpd-proxy-info"
-  publish-gear-endpoint:
-    Type: "NET_TCP:gear-endpoint-info"
+- python-2.6
+- python
+Publishes: 
 Subscribes:
-  set-db-connection-info:
-    Type: "NET_TCP:db:connection-info"
+  set-env:
+    Type: ENV:*
     Required: false
-  set-nosql-db-connection-info:
-    Type: "NET_TCP:nosqldb:connection-info"
+  set-doc-url:
+    Type: STRING:urlpath
     Required: false
-  set-mysql-connection-info:
-    Type: "NET_TCP:db:mysql"
-    Required : false
-  set-postgres-connection-info:
-    Type: "NET_TCP:db:postgres"
-    Required : false
-  set-mongo-connection-info:
-    Type: "NET_TCP:db:mongo"
-    Required : false
 Scaling:
   Min: 1
   Max: -1
-Group-Overrides:
-  - components:
-    - python-2.6.6
-    - web_proxy
 Endpoints:
-  - PROXY_PORT: 8080
-
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  - ws
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
+Version-Overrides:
+  '2.7':
+    Display-Name: Python 2.7
+    License: The Python License, version 2.7.3
+    Provides:
+    - python-2.7
+    - python
+    - python(version) = 2.7
+  '3.3':
+    Display-Name: Python 3.3
+    License: The Python License, version 3.3
+    Provides:
+    - python-3.3
+    - python
+    - python(version) = 3.3
+    Categories:
+    - service
+    - python
+    - web_framework
+    - community
