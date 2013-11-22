@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cartridge_type="python"
+cartridge_type="python-2.6.6"
 
 #  Ensure home directory sourced in.
 [ -z "$OPENSHIFT_HOMEDIR" ]  &&  source ~/.env/OPENSHIFT_HOMEDIR

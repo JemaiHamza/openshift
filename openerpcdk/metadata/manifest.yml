@@ -1,14 +1,10 @@
 Name: python
-Cartridge-Short-Name: python
-Display-Name: python-2.7.3 Cartridge
-Display-Name: Python 2.7.3 Community Cartridge
-Description: "Community supported Python 2.7 cartridge. See the community site for examples of bringing your cartridge to OpenShift. Python is a general-purpose, high-level programming language whose design philosophy emphasizes code readability. Popular development frameworks include: Django, Bottle, Pylons, Zope and TurboGears."
+Cartridge-Short-Name: openerpcdk
+Display-Name: Python 2.6.6 Community Cartridge
+Description: "jha"
 Version: 1.0.0
 License: "ASL 2.0"
 License-Url: http://www.apache.org/licenses/LICENSE-2.0.txt
-Cartridge-Version: 0.0.2-ae34981a
-Compatible-Versions:
-- 0.0.1
 Cartridge-Vendor: jha
 Vendor: jha
 Categories:
@@ -53,7 +49,7 @@ Cart-Data:
     Description: "Unique ID which identified the gear. This value changes between gears."
 Suggests:
 Provides:
-  - "python-2.7.3"
+  - "python-2.6.6"
   - "wsgi"
 Requires:
 Conflicts:
@@ -100,25 +96,8 @@ Scaling:
   Max: -1
 Group-Overrides:
   - components:
-    - python-2.7.3
+    - python-2.6.6
     - web_proxy
 Endpoints:
-- Private-IP-Name: IP
-  Private-Port-Name: PORT
-  Private-Port: 8080
-  Public-Port-Name: PROXY_PORT
-  Protocols:
-  - http
-  - ws
-  Options:
-    primary: true
-  Mappings:
-  - Frontend: ''
-    Backend: ''
-    Options:
-      websocket: true
-  - Frontend: /health
-    Backend: ''
-    Options:
-      health: true
+  - PROXY_PORT: 8080
 
